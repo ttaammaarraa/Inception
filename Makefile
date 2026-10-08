@@ -1,5 +1,5 @@
 NAME := inception
-COMPOSE := docker-compose -f srcs/docker-compose.yml
+COMPOSE := docker compose -f srcs/docker-compose.yml
 
 .PHONY: all build up down restart logs ps clean fclean secrets certs data
 
