@@ -1,0 +1,19 @@
+# Keep the required non-secret srcs/.env tracked; ignore local overrides.
+srcs/.env.local
+srcs/.env.*.local
+secrets/*.txt
+srcs/certs/*
+!srcs/certs/.gitkeep
+
+# Docker-backed application data
+data/
+srcs/data/
+/home/taabu-fe/data/
+
+# Local and editor files
+.DS_Store
+*.swp
+*.swo
+*~
+.vscode/
+__pycache__/
