@@ -38,9 +38,28 @@ make fclean      # Remove containers, named volumes, secrets, and certificates
 
 ## Resources
 
-The implementation was developed with the Docker Compose specification, Debian package documentation, MariaDB documentation, PHP-FPM documentation, NGINX documentation, and the WordPress deployment documentation as references.
+### Docker and Containerization
 
-AI was used as a development assistant to inspect the repository, draft Dockerfiles, Compose configuration, shell entrypoints, and documentation, and identify configuration issues. All generated material was reviewed against the 42 subject constraints. The final design decisions, commands, secret handling, and validation remain the responsibility of the project author.
+- [Docker overview](https://docs.docker.com/get-started/overview/)
+- [Docker Compose documentation](https://docs.docker.com/compose/)
+- [Docker volumes](https://docs.docker.com/engine/storage/volumes/)
+- [Docker secrets](https://docs.docker.com/engine/swarm/secrets/)
+
+### Service and Platform Documentation
+
+- [Debian documentation](https://www.debian.org/doc/)
+- [MariaDB documentation](https://mariadb.com/docs/)
+- [PHP-FPM documentation](https://www.php.net/manual/en/install.fpm.php)
+- [NGINX documentation](https://nginx.org/en/docs/)
+- [WordPress documentation](https://developer.wordpress.org/)
+
+### Architecture and Hypervisor Comparisons
+
+- [WILL CONTAINER REPLACE HYPERVISOR](https://medium.com/@zybisys/will-container-replace-hypervisor-35015957a624) (Medium, Zybisys)
+
+## AI Usage
+
+AI was used as a collaborative assistant for brainstorming, debugging, and configuration alignment. The project author maintained full understanding and control of the codebase.
 
 Detailed functional checks for each container, TLS protocol, restart policy, persistence, and volume binding are documented in [GUIDELINE_TESTING.md](GUIDELINE_TESTING.md).
 

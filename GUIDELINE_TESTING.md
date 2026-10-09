@@ -55,7 +55,7 @@ Confirm the MariaDB container is healthy:
 
 ```sh
 docker inspect --format '{{.State.Health.Status}}' mariadb
-docker-compose -f srcs/docker-compose.yml logs mariadb
+docker compose -f srcs/docker-compose.yml logs mariadb
 ```
 
 The result should be `healthy`. Verify the database and application user without exposing passwords in the command line:
@@ -74,7 +74,7 @@ Confirm PHP-FPM is listening on the private Docker network and is not published 
 ```sh
 docker exec wordpress sh -c 'php-fpm8.2 -tt'
 docker exec wordpress sh -c 'php -m | grep -E "mysqli|curl|gd|intl|mbstring|xml|zip"'
-docker-compose -f srcs/docker-compose.yml port wordpress 9000
+docker compose -f srcs/docker-compose.yml port wordpress 9000
 ```
 
 The last command should produce no host binding. Check the application and administrator setup:
@@ -93,8 +93,8 @@ Verify that NGINX is the only public service:
 
 ```sh
 docker port nginx
-docker-compose -f srcs/docker-compose.yml port wordpress 9000
-docker-compose -f srcs/docker-compose.yml port mariadb 3306
+docker compose -f srcs/docker-compose.yml port wordpress 9000
+docker compose -f srcs/docker-compose.yml port mariadb 3306
 ```
 
 Only `0.0.0.0:443` should be published. Test the site and certificate:

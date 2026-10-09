@@ -1,4 +1,5 @@
-# Keep the required non-secret srcs/.env tracked; ignore local overrides.
+.env
+srcs/.env
 srcs/.env.local
 srcs/.env.*.local
 secrets/*.txt
