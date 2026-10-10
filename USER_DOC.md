@@ -58,7 +58,7 @@ Check service state with:
 
 ```sh
 make ps
-docker-compose -f srcs/docker-compose.yml ps
+docker compose -f srcs/docker-compose.yml ps
 ```
 
-Inspect failures with `make logs` or `docker-compose -f srcs/docker-compose.yml logs <service>`.
+Inspect failures with `make logs` or `docker compose -f srcs/docker-compose.yml logs <service>`.

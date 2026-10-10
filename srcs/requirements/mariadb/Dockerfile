@@ -3,6 +3,7 @@ FROM debian:bookworm-slim
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends mariadb-server mariadb-client \
     && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/lib/mysql/* \
     && mkdir -p /run/mysqld \
     && chown -R mysql:mysql /run/mysqld /var/lib/mysql
 

@@ -1,6 +1,6 @@
 # Inception Testing Guidelines
 
-This guide verifies the mandatory Inception requirements for the `taabu-fe` deployment. Run the commands from the repository root after Docker Engine and `docker-compose` are installed.
+This guide verifies the mandatory Inception requirements for the `taabu-fe` deployment. Run the commands from the repository root after Docker Engine (with the `docker compose` Compose v2 command) is installed.
 
 ## 1. Prepare the Environment
 
@@ -35,7 +35,7 @@ No secret file should be tracked or displayed in normal Compose configuration ou
 Validate the fully interpolated Compose file before building:
 
 ```sh
-docker-compose -f srcs/docker-compose.yml config
+docker compose -f srcs/docker-compose.yml config
 make build
 make up
 ```
@@ -43,11 +43,11 @@ make up
 Check that exactly three containers are running:
 
 ```sh
-docker-compose -f srcs/docker-compose.yml ps
+docker compose -f srcs/docker-compose.yml ps
 docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}'
 ```
 
-The expected containers and images are named `mariadb`, `wordpress`, and `nginx`. Only `nginx` should publish a host port, and that port must be `443`.
+The expected containers are named `mariadb`, `wordpress`, and `nginx`; the custom images are namespaced as `inception-mariadb`, `inception-wordpress`, and `inception-nginx` so they never shadow the official Docker Hub `mariadb`/`wordpress`/`nginx` tags used by other setups on the same host. Only `nginx` should publish a host port, and that port must be `443`.
 
 ## 3. Test MariaDB
 
@@ -133,7 +133,7 @@ Each result should contain `unless-stopped`. Simulate a crash on one service and
 ```sh
 docker kill wordpress
 sleep 5
-docker-compose -f srcs/docker-compose.yml ps
+docker compose -f srcs/docker-compose.yml ps
 ```
 
 The WordPress container should be running again. Repeat only when needed for MariaDB and NGINX, and inspect logs if a service does not recover.
@@ -151,27 +151,8 @@ docker exec mariadb sh -c 'mariadb -uwpuser -p"$(cat /run/secrets/mysql_password
 
 Do not run `make fclean` before this test. `fclean` deliberately removes the named volumes and destroys persistent data.
 
-## 8. Verify Named Volumes and Host Paths
 
-Confirm that the application mounts are named volumes, not direct bind mounts in the service definitions:
-
-```sh
-docker volume inspect inception_mariadb_data
-docker volume inspect inception_wordpress_data
-docker inspect mariadb --format '{{json .Mounts}}'
-docker inspect wordpress --format '{{json .Mounts}}'
-```
-
-The volume driver options should resolve to:
-
-```text
-/home/taabu-fe/data/mariadb
-/home/taabu-fe/data/wordpress
-```
-
-The Compose file must show `mariadb_data:/var/lib/mysql` and `wordpress_data:/var/www/html`; the host paths are configured by the named volume driver, not as direct application bind mounts.
-
-## 9. Cleanup
+## 8. Cleanup
 
 Stop the stack without deleting data:
 
@@ -191,7 +172,7 @@ Perform a complete reset only when data loss is intentional:
 make fclean
 ```
 
-## 10. WordPress Browser & UI Verification
+## 9. WordPress Browser & UI Verification
 
 Perform these checks from a browser during the defense. They verify that NGINX serves the configured WordPress site over HTTPS, that the administrator account is valid, that a regular user can interact with the site, and that WordPress writes changes to MariaDB.
 

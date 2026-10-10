@@ -2,7 +2,7 @@
 
 ## Environment Setup From Scratch
 
-Install Docker Engine with the `docker-compose` command available, OpenSSL, and Git. Clone the repository and enter it:
+Install Docker Engine with the `docker compose` command available (Compose v2), OpenSSL, and Git. Clone the repository and enter it:
 
 ```sh
 git clone <repository-url> Inception
@@ -32,7 +32,7 @@ The configured host path must be writable by the current user. `make data` creat
 
 ## Makefile and Compose Commands
 
-The Makefile always invokes `docker-compose -f srcs/docker-compose.yml`:
+The Makefile always invokes `docker compose -f srcs/docker-compose.yml`:
 
 ```sh
 make secrets   # Create database secret files
@@ -51,10 +51,10 @@ make fclean    # Remove containers, named volumes, secrets, and certificates
 Equivalent direct Compose commands are:
 
 ```sh
-docker-compose -f srcs/docker-compose.yml config
-docker-compose -f srcs/docker-compose.yml build
-docker-compose -f srcs/docker-compose.yml up -d
-docker-compose -f srcs/docker-compose.yml down
+docker compose -f srcs/docker-compose.yml config
+docker compose -f srcs/docker-compose.yml build
+docker compose -f srcs/docker-compose.yml up -d
+docker compose -f srcs/docker-compose.yml down
 ```
 
 Each image is built locally from Debian Bookworm. No ready-made WordPress, NGINX, or MariaDB service image is used.
@@ -64,7 +64,7 @@ Each image is built locally from Debian Bookworm. No ready-made WordPress, NGINX
 Service and image names are both `nginx`, `wordpress`, and `mariadb`. Useful inspection commands include:
 
 ```sh
-docker-compose -f srcs/docker-compose.yml ps
+docker compose -f srcs/docker-compose.yml ps
 docker inspect nginx
 docker volume ls
 docker volume inspect inception_wordpress_data
