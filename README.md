@@ -80,3 +80,10 @@ A user-defined Docker bridge network gives services private DNS-based communicat
 ### Docker Volumes vs. Bind Mounts
 
 Docker-managed named volumes are owned and tracked by Docker and are the normal choice for persistent application data. A bind mount directly maps an arbitrary host path and gives the container a more explicit dependency on host filesystem layout. This project uses named volumes for MariaDB and WordPress data, with the local volume driver configured to persist them under `${HOST_DATA_PATH}/mariadb` and `${HOST_DATA_PATH}/wordpress`.
+
+### explanation for the project  
+
+*https://www.tldraw.com/f/WYJkKFwWVEi-aL8xR1x-a?d=v-5015.-3846.25600.13660.page*
+
+
+
